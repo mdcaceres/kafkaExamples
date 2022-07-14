@@ -32,15 +32,12 @@ public class KafkaProducer
         Producer<String, String> producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(properties);
 
         for(int i = 0; i < 10; i++){
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<>("second_topic", Integer.toString(i),"another message test, key: " + i);
+            ProducerRecord<String, String> producerRecord =
+                    new ProducerRecord<>("second_topic", Integer.toString(i),"another message test, key: " + i);
             producer.send(producerRecord);
+            // or flush the records and send then ok
+            //producer.flush();
         }
-
-
-
-
-        // or flush the records and send then ok
-        //producer.flush();
         producer.close();
         System.out.println( "Hello Kafka!" );
     }
